@@ -32,11 +32,6 @@ public class RabbitMqOutboxService {
     @Value("${outbox.routing-key}")
     String routingKey;
 
-    @Retryable(
-            retryFor = { Exception.class },
-            maxAttempts = 3,
-            backoff = @Backoff(delay = 1000, multiplier = 2)
-    )
     @Transactional
     public void processEvent(IncidentOutboxEvent event) {
         try {
