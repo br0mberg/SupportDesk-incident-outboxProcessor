@@ -36,7 +36,7 @@ public class IncidentOutboxEvent {
     String payload; // JSON с телом события, Lob - большой объект
 
     @Column(nullable = false)
-    LocalDateTime createdAt = LocalDateTime.now();
+    LocalDateTime createdAt;
 
     @Column(nullable = false)
     boolean processed = false;
