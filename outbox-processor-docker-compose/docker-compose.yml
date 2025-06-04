@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - support-network
+
+  incident-outbox-processor:
+    build:
+      context: ../incident-outbox-processor
+      dockerfile: Dockerfile
+    container_name: incident-outbox-processor
+    environment:
+      SPRING_APPLICATION_NAME: assistant-ai-outbox-processor
+      SPRING_DATASOURCE_URL: jdbc:postgresql://incident-postgres:5432/incident_service
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: rabbitmq
+      SPRING_RABBITMQ_PASSWORD: rabbitmq
+      OUTBOX_EXCHANGE: incident.exchange
+      OUTBOX_ROUTING-KEY: incident.created
+    depends_on:
+      incident-postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+    ports:
+      - "8083:8083"
+    networks:
+      - support-network
+
+volumes:
+  incident_postgres_data:
+
+networks:
+  support-network:
+    external: true
+    name: support-network

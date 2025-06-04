@@ -8,10 +8,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableRetry
 @EnableScheduling
 @SpringBootApplication
-public class AssistantAiOutboxProcessorApplication {
+public class IncidentOutboxProcessorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AssistantAiOutboxProcessorApplication.class, args);
+		SpringApplication.run(IncidentOutboxProcessorApplication.class, args);
 	}
 
 }
