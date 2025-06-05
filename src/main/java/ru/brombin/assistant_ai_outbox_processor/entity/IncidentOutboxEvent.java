@@ -23,17 +23,17 @@ public class IncidentOutboxEvent {
     UUID id;
 
     @Column(nullable = false)
-    String aggregateType; // Например, "Incident"
+    String aggregateType;
 
     @Column(nullable = false)
-    String aggregateId; // Например, ID инцидента
+    String aggregateId;
 
     @Column(nullable = false)
-    String type; // Тип события, например, "IncidentCreated TODO: сделать Enum?
+    String type;
 
     @Lob
     @Column(nullable = false)
-    String payload; // JSON с телом события, Lob - большой объект
+    String payload;
 
     @Column(nullable = false)
     LocalDateTime createdAt;
