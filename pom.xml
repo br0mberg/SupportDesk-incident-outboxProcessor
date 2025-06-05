@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ru.brombin</groupId>
-	<artifactId>Incident-outboxProcessor</artifactId>
+	<artifactId>SupportDesk-incident-outboxProcessor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>assistant-ai-outbox-processor</name>
 	<description>Demo project for Spring Boot</description>
